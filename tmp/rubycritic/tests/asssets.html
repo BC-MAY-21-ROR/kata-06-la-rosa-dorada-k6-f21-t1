@@ -52,7 +52,7 @@
       </span>
     </div>
     <div>
-      <h3><small>tests /</small> gilded_rose_spec.rb</h3>
+      <h3><small>tests /</small> asssets.rb</h3>
     </div>
   </div>
   <!--End Page Title -->
@@ -62,21 +62,21 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col-md-1">
-            <div class="rating b big">
-              B
+            <div class="rating a big">
+              A
             </div>
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">37</span><small> lines of codes</small></div>
-              <div><span class="metric">0</span><small> methods</small></div>
+              <div><span class="metric">22</span><small> lines of codes</small></div>
+              <div><span class="metric">2</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">N/A</span><small> complexity/method</small></div>
-              <div><span class="metric">4</span><small> churn</small></div>
+              <div><span class="metric">9.3</span><small> complexity/method</small></div>
+              <div><span class="metric">0</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">80.26</span><small> complexity</small></div>
+              <div><span class="metric">18.57</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -88,7 +88,7 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                0
+                1
                 smell
               </a>
             </li>
@@ -97,42 +97,27 @@
       </div>
     </div>
 
-    <code class="prettyprint linenums lang-ruby file-code js-file-code"># frozen_string_literal: true
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Items<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Items has no descriptive comment</span>          </div>  </li></ol>
+def Items.item
 
-require File.join(&quot;#{File.dirname(__FILE__)}/../app&quot;, &#39;gilded_rose&#39;)
-require File.join(&quot;#{File.dirname(__FILE__)}/../app&quot;, &#39;item&#39;)
-require_relative &#39;asssets&#39;
-describe GildedRose do
-  before(:each) do
-    @items = Items.item
-    @rose = GildedRose.new(@items)
+    items = [
+      Item.new(&#39;+5 Dexterity Vest&#39;, 10, 20),
+      Item.new(&#39;Aged Brie&#39;, 2, 0),
+      Item.new(&#39;Elixir of the Mongoose&#39;, 5, 7),
+      Item.new(&#39;Sulfuras, Hand of Ragnaros&#39;, 0, 80),
+      Item.new(&#39;Sulfuras, Hand of Ragnaros&#39;, -1, 80),
+      Item.new(&#39;Backstage passes to a TAFKAL80ETC concert&#39;, 15, 20),
+      Item.new(&#39;Backstage passes to a TAFKAL80ETC concert&#39;, 10, 40),
+      Item.new(&#39;Backstage passes to a TAFKAL80ETC concert&#39;, 5, 40),
+      Item.new(&#39;Backstage passes to a TAFKAL80ETC concert&#39;, 0, 40),
+      Item.new(&#39;Conjured Mana Cake&#39;, 3, 6),
+      Item.new(&#39;Aged Brie&#39;, 0, 0)
+    ]
+end
+
+def Items.cycle(rose, many = 50)
+    many.times { rose.update_quality }
   end
-
-  describe &#39;#update_quality&#39; do
-    it &#39;Changes the quality of the aged brie &#39; do
-      @rose.update_quality
-      expect(@items[1].quality).to eq 1
-    end
-    it &#39;Changes correctly the quality of aged brie when the sellin date has passed&#39; do
-      @rose.update_quality
-      expect(@items.last.quality).to eq 2
-    end
-    it &#39;Changes the quality of any item by 1 &#39; do
-      @rose.update_quality
-      expect(@items[2].quality).to eq 6
-    end
-    it &#39;Sulfuras never change &#39; do
-      @rose.update_quality
-      expect(@items[3].sell_in).to eq 0
-      expect(@items[3].quality).to eq 80
-    end
-    it &#39;The quality is never negative&#39; do
-      Items.cycle(@rose)
-      expect(@items[0].quality).to be &gt; -1
-    end
-  end
-
-  
 end
 </code>
   </div>

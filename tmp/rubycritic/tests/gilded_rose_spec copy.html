@@ -52,7 +52,7 @@
       </span>
     </div>
     <div>
-      <h3><small>tests /</small> gilded_rose_spec.rb</h3>
+      <h3><small>tests /</small> gilded_rose_spec copy.rb</h3>
     </div>
   </div>
   <!--End Page Title -->
@@ -62,22 +62,22 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col-md-1">
-            <div class="rating b big">
-              B
+            <div class="rating f big">
+              F
             </div>
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">37</span><small> lines of codes</small></div>
+              <div><span class="metric">62</span><small> lines of codes</small></div>
               <div><span class="metric">0</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">N/A</span><small> complexity/method</small></div>
-              <div><span class="metric">4</span><small> churn</small></div>
+              <div><span class="metric">0</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">80.26</span><small> complexity</small></div>
-              <div><span class="metric">0</span><small> duplications</small></div>
+              <div><span class="metric">159.79</span><small> complexity</small></div>
+              <div><span class="metric">83</span><small> duplications</small></div>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                0
+                1
                 smell
               </a>
             </li>
@@ -108,7 +108,7 @@ describe GildedRose do
     @rose = GildedRose.new(@items)
   end
 
-  describe &#39;#update_quality&#39; do
+  describe &#39;#update_quality&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="gilded_rose_spec copy.html#L12" class="js-smell-location">0</a>                  <a href="gilded_rose_spec.html#L12" class="js-smell-location">1</a>                  </div>  </li></ol>
     it &#39;Changes the quality of the aged brie &#39; do
       @rose.update_quality
       expect(@items[1].quality).to eq 1
@@ -132,7 +132,32 @@ describe GildedRose do
     end
   end
 
-  
+  describe &#39;.update_quality&#39; do
+    it &#39;Once the sell by date has passed, Quality degrades twice as fast&#39; do
+      Items.cycle(@rose, 11)
+      expect(@items[0].quality).to eq 8
+    end
+    it &quot;Quality of an item shouldn&#39;t be greater than 50&quot; do
+      Items.cycle(@rose, 60)
+      expect(@items.last.quality).to be &lt;= 50
+    end
+    it &#39;Backstage passes increase quality twice as fast when sellin date is less than 10&#39; do
+      @rose.update_quality
+      expect(@items[6].quality).to eq 42
+    end
+    it &#39;Backstage passes increase quality thrice as fast when sellin date is less than 5&#39; do
+      @rose.update_quality
+      expect(@items[7].quality).to eq 43
+    end
+    it &#39;Backstage passes quality drops to 0 after sellin date&#39; do
+      @rose.update_quality
+      expect(@items[8].quality).to eq 0
+    end
+    it &#39;Conjured items degrade in quality twice as fast&#39; do
+      @rose.update_quality
+      expect(@items[9].quality).to eq 4
+    end
+  end
 end
 </code>
   </div>

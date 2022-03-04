@@ -52,7 +52,7 @@
       </span>
     </div>
     <div>
-      <h3><small>tests /</small> gilded_rose_spec.rb</h3>
+      <h3><small>app /</small> item.rb</h3>
     </div>
   </div>
   <!--End Page Title -->
@@ -62,21 +62,21 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col-md-1">
-            <div class="rating b big">
-              B
+            <div class="rating a big">
+              A
             </div>
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">37</span><small> lines of codes</small></div>
-              <div><span class="metric">0</span><small> methods</small></div>
+              <div><span class="metric">13</span><small> lines of codes</small></div>
+              <div><span class="metric">2</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">N/A</span><small> complexity/method</small></div>
-              <div><span class="metric">4</span><small> churn</small></div>
+              <div><span class="metric">1.5</span><small> complexity/method</small></div>
+              <div><span class="metric">1</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">80.26</span><small> complexity</small></div>
+              <div><span class="metric">3.0</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -88,8 +88,8 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                0
-                smell
+                4
+                smells
               </a>
             </li>
           </ul>
@@ -97,42 +97,18 @@
       </div>
     </div>
 
-    <code class="prettyprint linenums lang-ruby file-code js-file-code"># frozen_string_literal: true
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">class Item<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Item has no descriptive comment</span>          </div>  </li></ol>
+  attr_accessor :name, :sell_in, :quality<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>Item#name is a writable attribute</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>Item#quality is a writable attribute</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>Item#sell_in is a writable attribute</span>          </div>  </li></ol>
 
-require File.join(&quot;#{File.dirname(__FILE__)}/../app&quot;, &#39;gilded_rose&#39;)
-require File.join(&quot;#{File.dirname(__FILE__)}/../app&quot;, &#39;item&#39;)
-require_relative &#39;asssets&#39;
-describe GildedRose do
-  before(:each) do
-    @items = Items.item
-    @rose = GildedRose.new(@items)
+  def initialize(name, sell_in, quality)
+    @name = name
+    @sell_in = sell_in
+    @quality = quality
   end
 
-  describe &#39;#update_quality&#39; do
-    it &#39;Changes the quality of the aged brie &#39; do
-      @rose.update_quality
-      expect(@items[1].quality).to eq 1
-    end
-    it &#39;Changes correctly the quality of aged brie when the sellin date has passed&#39; do
-      @rose.update_quality
-      expect(@items.last.quality).to eq 2
-    end
-    it &#39;Changes the quality of any item by 1 &#39; do
-      @rose.update_quality
-      expect(@items[2].quality).to eq 6
-    end
-    it &#39;Sulfuras never change &#39; do
-      @rose.update_quality
-      expect(@items[3].sell_in).to eq 0
-      expect(@items[3].quality).to eq 80
-    end
-    it &#39;The quality is never negative&#39; do
-      Items.cycle(@rose)
-      expect(@items[0].quality).to be &gt; -1
-    end
+  def to_s
+    &quot;#{@name}, #{@sell_in}, #{@quality}&quot;
   end
-
-  
 end
 </code>
   </div>

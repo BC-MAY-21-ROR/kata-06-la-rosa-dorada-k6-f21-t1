@@ -15,7 +15,6 @@ class GildedRose
       when 'Conjured Mana Cake' then  conjured(item)
       else                            any_item(item)
       end
-    
     end
   end
 
